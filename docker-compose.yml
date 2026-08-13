@@ -1,0 +1,17 @@
+services:
+  pz-bot:
+    build: ./pz-reboot-bot
+    restart: unless-stopped
+    environment:
+      - DISCORD_TOKEN=${DISCORD_TOKEN}
+      - GUILD_ID=${GUILD_ID}
+      - ALLOWED_USER_IDS=${ALLOWED_USER_IDS}
+      - RCON_HOST=pzserver        # nom du service du conteneur PZ dans CE compose
+      - RCON_PORT=16262
+      - RCON_PASSWORD=${RCON_PASSWORD}
+    networks:
+      - pz-network                # doit être le même réseau que le conteneur du serveur PZ
+
+networks:
+  pz-network:
+    external: true                # ou remplace par la définition du réseau existant du serveur PZ
