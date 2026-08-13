@@ -48,3 +48,14 @@ Dans Discord, tape `/reboot`. Avec un compte autorisé : la commande envoie
 `quit` en RCON et confirme. Avec un compte non listé : message de refus,
 sans consommer le cooldown. En répétant trop vite : message d'attente avec
 le temps restant.
+
+## Env vars
+
+| Variable | Obligatoire | Défaut | Description |
+|---|---|---|---|
+| `DISCORD_TOKEN` | Oui | — | Token du bot, récupéré sur le Developer Portal |
+| `ALLOWED_USER_IDS` | Oui | — | IDs Discord autorisés, séparés par des virgules |
+| `RCON_PASSWORD` | Oui | — | Mot de passe RCON du serveur Project Zomboid |
+| `RCON_HOST` | Non | `pzserver` | Nom du service Docker du serveur PZ (ou `127.0.0.1` si même hôte) |
+| `RCON_PORT` | Non | `16262` | Port RCON du serveur PZ |
+| `GUILD_ID` | Non | — | ID du serveur Discord, pour une sync instantanée des commandes en dev |
