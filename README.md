@@ -1,13 +1,17 @@
 # PZ Reboot Bot
 
-Bot Discord minimal avec une seule commande : `/reboot`, qui envoie `quit` en
-RCON au serveur Project Zomboid.
+Bot Discord minimal avec deux commandes : `/reboot`, qui envoie `quit` en
+RCON au serveur Project Zomboid, et `/players`, qui affiche les joueurs
+actuellement connectés.
 
 ## Fonctionnement
 
-- **Whitelist** : seuls les IDs Discord listés dans `ALLOWED_USER_IDS` (séparés
-  par des virgules) peuvent utiliser la commande. Tout le monde peut la voir
-  et l'exécuter, mais elle est rejetée pour les non-autorisés.
+- **`/reboot`** — **Whitelist** : seuls les IDs Discord listés dans
+  `ALLOWED_USER_IDS` (séparés par des virgules) peuvent utiliser la commande.
+  Tout le monde peut la voir et l'exécuter, mais elle est rejetée pour les
+  non-autorisés.
+- **`/players`** — accessible à tout le monde, envoie la commande RCON
+  `players` et affiche le nombre de joueurs connectés ainsi que leurs noms.
 - **Cooldown** : 3 minutes, **global** (pas par utilisateur) — si quelqu'un
   vient de déclencher un reboot, personne d'autre ne peut en relancer un
   avant l'expiration du délai, peu importe qui.
@@ -48,6 +52,8 @@ Dans Discord, tape `/reboot`. Avec un compte autorisé : la commande envoie
 `quit` en RCON et confirme. Avec un compte non listé : message de refus,
 sans consommer le cooldown. En répétant trop vite : message d'attente avec
 le temps restant.
+
+Tape `/players` pour voir le nombre de joueurs connectés et leurs noms.
 
 ## Env vars
 

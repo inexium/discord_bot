@@ -105,5 +105,29 @@ async def reboot(interaction: discord.Interaction):
     )
 
 
+@bot.tree.command(name="players", description="Affiche le nombre de joueurs connectés sur le serveur Project Zomboid")
+async def players(interaction: discord.Interaction):
+    await interaction.response.defer(thinking=True)
+
+    try:
+        response = await rcon("players", host=RCON_HOST, port=RCON_PORT, passwd=RCON_PASSWORD)
+    except Exception as e:
+        logger.error("Erreur RCON: %s", e)
+        await interaction.followup.send(f"❌ Échec de la récupération des joueurs : {e}")
+        return
+
+    names = [
+        line.strip()[1:].strip()
+        for line in response.splitlines()
+        if line.strip().startswith("-")
+    ]
+
+    if names:
+        liste = "\n".join(f"- {name}" for name in names)
+        await interaction.followup.send(f"🧟 **{len(names)} joueur(s) connecté(s)** :\n{liste}")
+    else:
+        await interaction.followup.send("🧟 **0 joueur connecté** sur le serveur.")
+
+
 if __name__ == "__main__":
     bot.run(DISCORD_TOKEN)
